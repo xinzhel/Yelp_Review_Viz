@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>LV Restaurant Review</title>
+
+   <!-- leaflet css file -->
+   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+   crossorigin=""/>
+
+   <!-- Bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <!-- jQuery UI CSS -->
+    <link rel="stylesheet" href="css/jquery-ui.min.css">
+
+    <!-- Custom styling -->
+    <link rel="stylesheet" href="css/d3.css">
+
+    <script src="https://kit.fontawesome.com/6aa0b096b5.js"></script>
+
+
+</head>
+
+<body>
+
+  <header id="page-hero" class="site-header">
+
+    <nav class="site-nav text-uppercase navbar navbar-expand-md bg-secondary navbar-dark fixed-top">
+
+      <div class="container-fluid">
+
+
+        <a class="navbar-brand" href="#page-hero"><i class="fas fa-utensils"></i>   LV Restaurant Review</a>
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" href="#page-intro">Introduction</a>
+          <a class="nav-item nav-link" href="#page-guide">Guide</a>
+          <a class="nav-item nav-link" href="#page-overview">Overview</a>
+          <a class="nav-item nav-link" href="#page-details">Details</a>  
+          <a class="nav-item nav-link" href="https://www.yelp.com/dataset/challenge">Dataset</a>  
+                  
+        </div>
+      </div>
+
+      
+    </nav>
+  </header>
+
+  <article id="page-intro" class="page-section text-center py-5">
+    <header class="text-center">
+      <h2>INTRODUCTION</h2>
+    </header>
+
+    <section class="layout-hero d-flex align-item-center text-center">
+      <div class="container">
+        <p>
+          <br> This visualization will show you the restaurant information in <b>Las Vegas</b>. 
+          <br> It will explain what aspects can affect the <b>popularity</b>(i.e. the review amount) and the customer satisfaction(i.e. <b>rating stars</b>). Although this visualization will mainly focus on the impact of <b>location</b>. You can also see how the <b>category and other factors</b> affect the restaurant.
+        </p>
+      </div>
+    </section>
+  </article>
+
+  
+
+  <article id="page-guide" class="page-section text-center py-5">
+    <header class="text-light text-center">
+      <h2>GUIDE</h2>
+    </header>
+
+    <section class="layout-hero d-flex align-item-center text-light">
+      <div class="container">
+        <p>
+          <br><h4>Overview</h4>
+          <br><b>Click</b> the button to see the general star ratings/review amounts for each category of restaurants in LV.
+          <br>
+          <br><h4>Details</h4>
+          <br>1. Filter by category and rate: 
+          <br>Adjust the <b>slider</b> and the <b>selection box</b> to see the filtered restaurants shown on the graph and map.
+          <br>
+          <br>2. Filter by location:
+          <br><b>Zoom</b> the map to filter the circles on the graph.
+          <br>
+          <br>3.  Details about a restaurant
+          <br><b>Hover</b> over the circle on the graph to see the information of the corresponding restaurant on map;
+          <br><b>Click</b> the button on the tooltips to see the details of key words from the reviews.
+          <br><b>OR</b>
+          <br><b>Click</b> the circle on the map to see the details.
+          <br>
+      </p>
+        
+      </div>
+    </section>
+      
+    
+  </article>
+
+  <article id="page-overview" class="page-section text-center py-5">
+    <header class="text-center">
+      <h2>OVERVIEW</h2>
+      <br>
+    </header>
+    <section class="layout-hero d-flex align-item-center text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col text-center">
+           <button id="amountBtn" class="btn btn-primary">Review Amount</button>
+           <button id="starBtn" class="btn btn-primary">Stars</button>
+         </div>
+         </div>
+         <div class="row">
+          <div class="col text-center">
+            <div id="bar-chart"></div>
+          </div>
+         </div>
+      </div>
+    </section>
+  </article>
+
+  <article id="page-details" class="page-section text-center py-5">
+    <header>
+      <h2>DETAILS</h2>
+      <br>
+    </header>
+
+    <section>
+      <div class="container">
+
+        <!-- selection, slider -->
+        <div class="row text-light"  style="background-color: grey;">
+          <div class="col-lg-3">
+               <label>Minimum Rate: <span id="rateLabel">1</span></label>
+          </div>
+          <div class="col-lg-3">
+              <div id="slider-div" style="margin-top: 9px;">
+                  <div id="date-slider"></div>
+              </div>
+          </div>
+
+          <div class="col-lg-3">
+              <label>Cuisine:</label>
+          </div>
+
+          <div class="col-lg-3">
+              
+              <select id="category-select" class="form-control">
+                  <option selected value="all">All</option>
+                  <option value="Fast Food">Fast Food</option>
+                  <option value="American">American</option>
+                  <option value="Mexican">Mexican</option>
+                  <option value="Japanese">Japanese</option>
+                  <option value="Mediterranean">Mediterranean</option>
+                  <option value="Chinese">Chinese</option>
+                  <option value="Buffets">Buffets</option>
+                  <option value="Latin American">Latin American</option>
+                  <option value="Greek">Greek</option>
+                  <option value="French">French</option>
+              </select>
+          </div>
+        </div><br><br><br><br>
+
+        <!-- graph, map, word cloud -->
+        <div class="row">
+          <div class="col-lg-6">
+              <div id="chart-area"></div>
+          </div>
+          <div class="col-lg-4">
+              <div id="map-area"></div>
+            </div>
+
+          <div class="col-lg-2">
+              <div id="word-cloud"></div>
+          </div>
+        </div>
+
+      </div>
+
+      
+    </section>
+    
+    
+  </article>
+
+
+  
+
+
+
+  
+
+  <form action="http://www.wordle.net/advanced" method="POST">
+    <textarea name="text" style="display:none">
+        How much wood would a woodchuck chuck if
+        a woodchuck could chuck wood?
+    </textarea>
+    <input type="submit">
+</form>
+
+
+    <!-- leaflet js file -->
+   <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+   integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+   crossorigin=""></script>
+
+   <!-- d3 js file -->
+   <script type="text/javascript" src="http://d3js.org/d3.v4.js"></script>
+
+   <!-- jquery -->
+   <script src="js/jquery.min.js"></script>
+
+  <!-- jquery ui-->
+   <script src="js/jquery-ui.min.js"></script>   
+
+   <!-- bootstrap -->
+  <!-- <script src="js/bootstrap.bundle.min"></script> -->
+
+  <!-- Custom JS -->
+  <script src="js/d3.js"></script>
+
+  <!-- Custom JS -->
+  <script src="js/d3cloud.js"></script>
+
+</body>
+   
+   
+</html>

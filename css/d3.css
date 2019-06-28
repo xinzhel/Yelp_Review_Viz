@@ -1,0 +1,34 @@
+#chart-area svg {
+	margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+#page-guide {
+	background: url(../images/food3.jpg);
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+
+}
+
+
+#page-guide .layout-hero {
+	min-height: 50vh; /*view height*/
+}
+
+.legend i {
+			width: 18px;
+			height: 18px;
+			float: left;
+			margin-right: 8px;
+			opacity: 0.7;
+		}
+/*#logo {
+	height:50px;
+}
+
+.navbar-brand {
+	height: 60px;
+	padding: 5px 0px;
+}*/
